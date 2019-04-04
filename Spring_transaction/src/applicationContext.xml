@@ -7,7 +7,7 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
 	<!-- 导入资源文件 -->
 	<context:property-placeholder location="classpath:db.properties" />
-	
+	<!--查找使用构造型（stereotype）注解所标注的类，如@Component(组件)，@Service（服务），@Controller（控制器），@Repository（数据仓库）-->
 	<context:component-scan base-package="com.atguigu.spring"></context:component-scan>
 	
 	<!-- 配置数据源 -->
