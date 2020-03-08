@@ -1,8 +1,12 @@
 import java.util.Scanner;
-
-public class Half_Search {
+/**
+ *
+ * 折半查找法
+ *
+ * **/
+public class halfSearch {
     public  static  void  main(String arg[]){
-        int [] math ={1,3,4,6,7,9,11};
+        int [] math ={1,3,4,6,7,9,11};//有序
         System.out.println("输入查找的数字");
         Scanner scanner = new Scanner(System.in);
         int number = scanner.nextInt();
