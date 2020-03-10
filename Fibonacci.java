@@ -4,7 +4,7 @@ import java.util.Scanner;
  * 斐波那契数列
  *
  * */
-public class fibonacci {
+public class Fibonacci {
     public static void main(String[] args) {
         System.out.println("输入查找斐波那契数列第几个项");
         Scanner scanner = new Scanner(System.in);
