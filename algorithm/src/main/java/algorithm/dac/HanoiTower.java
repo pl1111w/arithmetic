@@ -2,7 +2,7 @@ package algorithm.dac;
 
 /**
  * @title: pl1111w
- * @description: 动态规划算法-汉诺塔
+ * @description: 分治法-汉诺塔
  * @author: Kris
  * @date 2020/12/2 20:55
  */
