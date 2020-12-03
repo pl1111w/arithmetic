@@ -14,8 +14,6 @@ public class completeKnapsackProblem {
         int container = 5;//背包容量
         int number = val.length;//物品个数
 
-        int[][] path = new int[number + 1][container + 1];
-
         //创建二维数组
         //v[i][j]表示前i个物品能够装入容量为j的背包中的最大价值
         int[][] v = new int[number + 1][container + 1];
