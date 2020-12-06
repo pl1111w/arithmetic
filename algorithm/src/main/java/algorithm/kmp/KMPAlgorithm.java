@@ -2,7 +2,7 @@ package algorithm.kmp;
 
 /**
  * @title: pl1111w
- * @description: TODO
+ * @description: KMP算法
  * @author: Kris
  * @date 2020/12/6 10:03
  */
