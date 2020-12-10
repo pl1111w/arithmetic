@@ -28,12 +28,16 @@ public class DijestraAlgorithm {
         //测试, 看看图的邻接矩阵是否ok
         graph.showGraph();
         //测试迪杰斯特拉算法
+        graph.dijestra(6);
+        graph.showDijestra();
+
     }
 }
 
 class Graph {
     private char[] vertex;//顶点数组
     private int[][] martix;//邻接矩阵
+    private VisitedVertax vv;
 
     public Graph(char[] vertex, int[][] martix) {
         this.martix = martix;
@@ -46,11 +50,43 @@ class Graph {
             System.out.println(Arrays.toString(martix[i]));
         }
     }
+
+    /**
+     * @param index 出发顶点的下标
+     */
+    public void dijestra(int index) {
+        vv = new VisitedVertax(vertex.length, index);
+        update(index);//更新index下标周围距离以及前驱节点
+        for (int j = 1; j < vertex.length; j++) {
+            index = vv.updateArr();//选择新的顶点；
+            update(index);
+        }
+    }
+
+    /**
+     * @param index
+     */
+    public void update(int index) {
+        int len = 0;
+        for (int i = 0; i < martix[index].length; i++) {
+            //vv.getDis(index):出发顶点到index顶点的距离
+            //vv.getDis(index)：顶点index到顶点i的距离
+            len = vv.getDis(index) + martix[index][i];
+            if (!vv.in(i) && len < vv.getDis(i)) {
+                vv.updatePre(i, index);
+                vv.updateDis(i, len);
+            }
+        }
+    }
+
+    public void showDijestra() {
+        vv.show();
+    }
 }
 
 class VisitedVertax {
     /**
-     * 表示各个顶点是否访问过，1：访问过；0：未访问
+     * 表示各个顶点是否访问过，1：访问过；0：未访问，动态变化的；
      **/
     private int[] already_arr;
     /**
@@ -72,7 +108,9 @@ class VisitedVertax {
         this.dis = new int[length];
         Arrays.fill(dis, 100);//初始化dis数组；
         this.dis[index] = 0;
+        this.already_arr[index] = 1;//设置出发顶点已经访问
     }
+
 
     /**
      * @param index:顶点下标
@@ -80,5 +118,86 @@ class VisitedVertax {
      */
     public boolean in(int index) {
         return already_arr[index] == 1;
+    }
+
+    /**
+     * 更新出发点到下标为index顶点的距离
+     *
+     * @param index 下标
+     * @param len   距离
+     */
+    public void updateDis(int index, int len) {
+        dis[index] = len;
+    }
+
+    /**
+     * 更新前驱节点为pre的顶点为index顶点
+     *
+     * @param pre
+     * @param index
+     */
+    public void updatePre(int pre, int index) {
+        pre_visited[pre] = index;
+    }
+
+    /**
+     * 出发顶点到index顶点的距离
+     *
+     * @param index 顶点
+     * @return 距离
+     */
+    public int getDis(int index) {
+        return dis[index];
+    }
+
+    /**
+     * 下一个未访问的节点更新为已经访问并返回下标
+     *
+     * @return
+     */
+    public int updateArr() {
+        int min = 100, index = 0;
+        for (int i = 0; i < already_arr.length; i++) {
+            if (already_arr[i] == 0 && min > dis[i]) {
+                min = dis[i];//找到距离最近的
+                index = i;
+            }
+        }
+        already_arr[index] = 1;
+        return index;
+    }
+    //显示最后的结果
+    //即将三个数组的情况输出
+    public void show() {
+
+        System.out.println("==========================");
+        //输出already_arr
+        for(int i : already_arr) {
+            System.out.print(i + " ");
+        }
+        System.out.println();
+        //输出pre_visited
+        for(int i : pre_visited) {
+            System.out.print(i + " ");
+        }
+        System.out.println();
+        //输出dis
+        for(int i : dis) {
+            System.out.print(i + " ");
+        }
+        System.out.println();
+        //为了好看最后的最短距离，我们处理
+        char[] vertex = { 'A', 'B', 'C', 'D', 'E', 'F', 'G' };
+        int count = 0;
+        for (int i : dis) {
+            if (i != 100) {
+                System.out.print(vertex[count] + "("+i+") ");
+            } else {
+                System.out.println("N ");
+            }
+            count++;
+        }
+        System.out.println();
+
     }
 }
