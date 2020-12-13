@@ -1,4 +1,4 @@
-package algorithm.Cruskal;
+package algorithm.cruskal;
 
 import java.util.Arrays;
 
