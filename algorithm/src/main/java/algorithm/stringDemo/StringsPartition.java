@@ -12,11 +12,10 @@ import java.util.List;
 public class StringsPartition {
 
     public static void main(String[] args) {
-        StringsPartition stringsPartition = new StringsPartition();
-        List<List<String>> list = stringsPartition.partition("ababa");
+       StringsPartition stringsPartition = new StringsPartition();
+        List<List<String>> list= stringsPartition.partition("ababa");
         System.out.println(list);
     }
-
     public List<List<String>> partition(String s) {
         List<List<String>> result = new ArrayList<>();
         List<String> partition = new ArrayList<>();
@@ -26,13 +25,12 @@ public class StringsPartition {
         helper(s, partition, 0, result);
         return result;
     }
-
     //回溯
-    private void helper(String s, List<String> partition,
-                        int startIndex, List<List<String>> result) {
+    private void helper (String s, List<String> partition,
+                         int startIndex, List<List<String>> result) {
         if (startIndex == s.length()) {
             result.add(new ArrayList<>(partition));
-            return;
+            return ;
         }
 
         for (int i = startIndex; i < s.length(); i++) {
@@ -45,9 +43,8 @@ public class StringsPartition {
             partition.remove(partition.size() - 1);//回溯
         }
     }
-
     //isPalindrome
-    private boolean isPalindrome(String s) {
+    private boolean isPalindrome (String s) {
         for (int i = 0, j = s.length() - 1; i < j; i++, j--) {
             if (s.charAt(i) != s.charAt(j)) {
                 return false;
@@ -55,7 +52,6 @@ public class StringsPartition {
         }
         return true;
     }
-
     //分治法
     private List<List<String>> partitionHelper(String s, int start) {
         //递归出口，空字符串
@@ -80,8 +76,6 @@ public class StringsPartition {
         }
         return ans;
     }
-
-    //动态规划算法
     public List<List<String>> partitionPlus(String s) {
         boolean[][] dp = new boolean[s.length()][s.length()];
         int length = s.length();
