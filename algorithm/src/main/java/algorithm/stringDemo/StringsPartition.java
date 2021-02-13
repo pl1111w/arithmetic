@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  * @title: pl1111w
- * @description:
+ * @description: 分割回文字符串
  * @author: Kris
  * @date 2021/2/10 20:24
  */
@@ -25,11 +25,11 @@ public class StringsPartition {
         helper(s, partition, 0, result);
         return result;
     }
-    //helper
+    //回溯
     private void helper (String s, List<String> partition,
                          int startIndex, List<List<String>> result) {
         if (startIndex == s.length()) {
-            result.add(new ArrayList<String>(partition));
+            result.add(new ArrayList<>(partition));
             return ;
         }
 
@@ -40,7 +40,7 @@ public class StringsPartition {
             }
             partition.add(sb);
             helper(s, partition, i + 1, result);
-            partition.remove(partition.size() - 1);
+            partition.remove(partition.size() - 1);//回溯
         }
     }
     //isPalindrome
@@ -51,5 +51,29 @@ public class StringsPartition {
             }
         }
         return true;
+    }
+    //分治法
+    private List<List<String>> partitionHelper(String s, int start) {
+        //递归出口，空字符串
+        if (start == s.length()) {
+            List<String> list = new ArrayList<>();
+            List<List<String>> ans = new ArrayList<>();
+            ans.add(list);
+            return ans;
+        }
+        List<List<String>> ans = new ArrayList<>();
+        for (int i = start; i < s.length(); i++) {
+            //当前切割后是回文串才考虑
+            if (isPalindrome(s.substring(start, i + 1))) {
+                String left = s.substring(start, i + 1);
+                //遍历后边字符串的所有结果，将当前的字符串加到头部
+                for (List<String> l : partitionHelper(s, i + 1)) {
+                    l.add(0, left);
+                    ans.add(l);
+                }
+            }
+
+        }
+        return ans;
     }
 }
