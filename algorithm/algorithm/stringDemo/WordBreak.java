@@ -1,4 +1,4 @@
-package algorithm.stringDemo;
+package algorithm.src.main.java.algorithm.stringDemo;
 
 import java.util.*;
 
