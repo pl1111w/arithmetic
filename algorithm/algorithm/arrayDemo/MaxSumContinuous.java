@@ -10,7 +10,7 @@ public class MaxSumContinuous {
 
     public static void main(String[] args) {
 
-        int[] nums = new int[]{2, 1, -1, 4, -1, 2, 1, -5, 4};
+        int[] nums = new int[]{-2, 1, -1, 4, -1, 2, 1, -5, 4};
         MaxSumContinuous maxSumContinuous = new MaxSumContinuous();
         int result = maxSumContinuous.maxSubArray(nums);
         System.out.println(result);
