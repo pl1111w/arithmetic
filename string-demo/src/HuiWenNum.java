@@ -20,15 +20,15 @@
 public class HuiWenNum {
 
     public static void main(String[] args) {
-        int num = 121;
-        System.out.println(HuiWenNum(num));
+        int num = 12221;
+        System.out.println(HuiWenNum2(num));
     }
 
     public static boolean HuiWenNum(int x) {
         if (x < 0 || (x % 10 == 0 && x != 0)) return false;
         int revertedNumber = 0;
-        while (x > revertedNumber) {
-            revertedNumber = revertedNumber * 10 + x % 10;
+        while (x > revertedNumber) {  //不满足条件时 走完一半 前后任意长度组成的值都一样
+            revertedNumber = revertedNumber * 10 + x % 10; //从后往前构建数
             x = x / 10;
         }
         return revertedNumber == x || x == revertedNumber / 10;
@@ -37,13 +37,13 @@ public class HuiWenNum {
     public static boolean HuiWenNum2(int x) {
         if (x < 0) return false;
         int div = 1;
-        while (x / div > 0) div *= 10;
+        while (x / div >= 10) div *= 10;
         while (x > 0) {
             int left = x / div;
-            int right = x % div;
+            int right = x % 10;
             if (left != right) return false;
-            x = (x % div) / 10;
-            div /= 100;
+            x = (x % div) / 10; //掐头去尾
+            div /= 100;  //掐头去尾位数少2 故除100
         }
         return true;
     }
