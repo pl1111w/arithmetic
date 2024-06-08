@@ -14,14 +14,14 @@ public class ReverseBetween {
         ListNode dummyNode = new ListNode(-1);
         dummyNode.next = head;
         ListNode pre = dummyNode.next;
-
+        //找到要反转节点的前驱节点
         for (int i = 0; i < left - 1; i++) {
             pre = pre.next;
         }
         ListNode cur = pre.next;
         ListNode next;
         for (int j = left; j < right; j++) {
-            next = cur.next;
+            next = cur.next;//保存当前节点下一个节点
             cur.next = next.next;
             next.next = pre.next;
             pre.next = next;
